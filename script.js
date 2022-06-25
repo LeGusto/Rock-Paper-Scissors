@@ -2,6 +2,33 @@
 let scorePlayer = 0;
 let scoreComputer = 0;
 
+function FadeIn(obj) {
+    console.log(obj);
+    let divObj = obj.textContent.split("");
+    obj.textContent = "";
+    let timer = 0;
+    divObj.forEach((letter) => {
+        
+            let spanner = document.createElement('span');
+            spanner.textContent = letter;
+            spanner.classList.add("waiting");
+            obj.appendChild(spanner);
+        
+    })
+
+    let spanners = document.querySelectorAll("span");
+
+    spanners.forEach((spanner) => {
+        setTimeout(() => {
+            spanner.classList.remove("waiting");
+            spanner.classList.add("go-in");
+        console.log(obj.textContent);
+        }, timer);
+        timer += 100;
+    }
+    )
+}
+
 function Capitalizer(word){
     return word.charAt(0).toUpperCase() + word.slice(1,word.length).toLowerCase();
 }
@@ -48,6 +75,11 @@ function check_input(playerChoice){
     return true;
 }
 
+FadeIn(document.querySelector(".opener_h"));
+
+/*
+console.log("bruh");
+
 for (i = 0; i<5; i++){
     let playerChoice = prompt("Choose your symbol.").toLowerCase();
 
@@ -67,4 +99,4 @@ else if (scoreComputer == scorePlayer) {
 }
 else {
     console.log("You won!");
-}
+}*/

@@ -1,0 +1,47 @@
+* {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-weight: 700;
+}
+
+body {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: auto;
+
+}
+
+.play {
+    border: 3px solid;
+    border-radius: 0;
+    border-color: white;
+    width: 300px;
+    height: 100px;
+    font-size: 46px;
+    margin-top: 100px;
+}
+
+.opener_h {
+    font-size: 60px;
+} 
+
+span.waiting {
+    opacity: 0;
+}
+
+span.go-in {
+    color: pink;
+    /*opacity: 0;*/
+    animation-name: fadeIn;
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0};
+    to {opacity: 1};
+}
