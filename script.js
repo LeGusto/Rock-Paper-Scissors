@@ -51,6 +51,7 @@ function restart() {
         play_view.classList.add('go-out');
         play_view.addEventListener('animationend', () => {
             play_view.setAttribute('id','hide');
+            ender.setAttribute('id', '');
             ender.classList.add('go-in2');
         r_but.addEventListener('click', () => {
             scoreComputer = 0;
@@ -138,7 +139,7 @@ function ecl(e) {
 
 function begin(){
     play_view.classList.add("go-in2");
-
+    play_view.setAttribute('id', '');
     
 
     function on_click() {
