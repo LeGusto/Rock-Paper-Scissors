@@ -7,14 +7,33 @@
 
 body {
     background-color: black;
+
+}
+
+img {
+    width: 200px;
+    background-color: white;
+    border: 10px solid;
+    border-radius: 20px;
+    height: 200px;
+}
+
+.intro {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex: auto;
-
 }
 
+.score {
+    display: flex;
+    gap:100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.retry,
 .play {
     border: 3px solid;
     border-radius: 0;
@@ -25,6 +44,10 @@ body {
     margin-top: 100px;
 }
 
+#hide {
+    display: none;
+}
+
 .opener_h {
     font-size: 60px;
 } 
@@ -33,15 +56,81 @@ span.waiting {
     opacity: 0;
 }
 
-span.go-in {
-    color: pink;
-    /*opacity: 0;*/
+span.go-in,
+.play.go-in,
+div.go-in {
+    opacity: 1;
     animation-name: fadeIn;
     animation-duration: 4s;
     animation-fill-mode: forwards;
+}
+
+span.go-in2,
+.play.go-in2,
+div.go-in2 {
+    opacity: 1;
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.waiting, .waiting2 {
+    opacity: 0;
+}
+
+.score {
+    font-size: 60px;
+}
+
+.play_view {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap:50px;
+}
+
+.weapon_pick {
+    font-size: 46px;
+}
+
+.images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.go-out
+ {
+    opacity: 0;
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.end-text {
+    font-size: 60px;
+}
+
+.ending {
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes fadeIn {
     from {opacity: 0};
     to {opacity: 1};
 }
+
+@keyframes fadeOut {
+    from {opacity: 1};
+    to {opacity: 0};
+}
+

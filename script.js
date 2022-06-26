@@ -1,6 +1,14 @@
 
 let scorePlayer = 0;
 let scoreComputer = 0;
+let choices = document.querySelectorAll(".choice");
+let play_view = document.querySelector(".play_view");
+let ender = document.querySelector(".ending");
+let r_but = document.querySelector(".retry");
+let comment = document.querySelector(".comment");
+let end_t = document.querySelector(".end-text");
+
+
 
 function FadeIn(obj) {
     console.log(obj);
@@ -22,7 +30,8 @@ function FadeIn(obj) {
         setTimeout(() => {
             spanner.classList.remove("waiting");
             spanner.classList.add("go-in");
-        console.log(obj.textContent);
+            /*spanner.addEventListener('animationend', (e) => {spanner.classList.remove("go-in")});
+            */
         }, timer);
         timer += 100;
     }
@@ -31,6 +40,43 @@ function FadeIn(obj) {
 
 function Capitalizer(word){
     return word.charAt(0).toUpperCase() + word.slice(1,word.length).toLowerCase();
+}
+
+function restart() {
+    choices.forEach((choser) => {
+        choser.removeEventListener('click', ecl);
+         
+    });
+        play_view.classList.remove('go-in2');
+        play_view.classList.add('go-out');
+        play_view.addEventListener('animationend', () => {
+            play_view.setAttribute('id','hide');
+            ender.classList.add('go-in2');
+        r_but.addEventListener('click', () => {
+            scoreComputer = 0;
+            scorePlayer = 0;
+            document.querySelector(".computer .points").textContent = scoreComputer;
+            document.querySelector(".player .points").textContent = scorePlayer;
+            removeEventListener('click', r_but);
+            play_view.setAttribute('id', '');
+            ender.classList.remove('go-in2');
+            play_view.classList.remove('go-out');
+            comment.textContent = "-";
+            begin();
+        }, {once:true})
+
+    }, {once: true})
+}
+
+
+function ending()
+{
+    if (scoreComputer === 5 || scorePlayer == 5) {
+        if (scoreComputer == 5) {end_t.textContent = "You lose..."}
+        else {end_t.textContent = "You win!"}
+        return true;
+    }
+    return false;
 }
 
 function ComputerChoice(){
@@ -49,19 +95,26 @@ function ComputerChoice(){
     return choice;
 }
 
+
+
 function PlayRound(playerInput, computerInput = ComputerChoice()){
-    
+    console.log(playerInput);
+
     if (playerInput === computerInput) {
-        console.log(`Tie!`);
+        comment.textContent = "Tie!";
     }
     else if ((playerInput == "rock" && computerInput == "paper") || (playerInput == "paper" && computerInput == "scissors") || (playerInput == "scissors" && computerInput == "rock")){
-        console.log(`You lose! ${Capitalizer(computerInput)} beats ${Capitalizer(playerInput)}.`);
+        comment.textContent = `You lose! ${Capitalizer(computerInput)} beats ${playerInput}.`;
         scoreComputer++;
+        document.querySelector(".computer .points").textContent = scoreComputer;
     }
     else {
-        console.log(`You win! ${Capitalizer(playerInput)} beats ${Capitalizer(computerInput)}.`);
+        comment.textContent = `You win! ${Capitalizer(playerInput)} beats ${computerInput}.`;
         scorePlayer++;
+        document.querySelector(".player .points").textContent = scorePlayer;
     }
+
+    if (ending()) {restart()};
 }
 
 function check_input(playerChoice){
@@ -75,7 +128,57 @@ function check_input(playerChoice){
     return true;
 }
 
+function ecl(e) {
+    chosen = e.target;
+    
+        PlayRound(chosen.alt.toLowerCase());
+       
+}
+
+
+function begin(){
+    play_view.classList.add("go-in2");
+
+    
+
+    function on_click() {
+
+                choices.forEach((chosen) =>{
+            chosen.addEventListener('click', ecl);
+        })
+    }
+
+    /*play_view.addEventListener('animationend', on_click, {once: true})*/
+    on_click();
+}
+
 FadeIn(document.querySelector(".opener_h"));
+
+setTimeout(() => {
+    let p_but = document.querySelector(".play");
+    if (!p_but.classList.contains("go-out")) {
+        p_but.classList.add("go-in");
+        p_but.classList.remove("waiting");
+    }
+    /*p_but.addEventListener('animationend', (e) => {p_but.remove("go-in"), document.querySelector(".play").removeEventListener('animationend')});
+*/
+},2500);
+
+let play_b = document.querySelector(".play");
+let head_i = document.querySelector(".opener_h");
+
+play_b.addEventListener('click', (e) => {
+    let ins = document.querySelectorAll(".go-in");
+    ins.forEach((obj) => {obj.classList.remove("go-in"), console.log("removed")});
+    play_b.classList.add("go-out");
+    head_i.classList.add("go-out");
+    play_b.classList.remove("go-in");
+    play_b.addEventListener('animationend', (e) =>
+     {head_i.setAttribute('id','hide');("hide"),
+     play_b.setAttribute('id','hide');("hide"), 
+    begin()}, {once: true});
+    
+}, {once: true});
 
 /*
 console.log("bruh");
